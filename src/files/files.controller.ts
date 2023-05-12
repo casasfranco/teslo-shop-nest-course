@@ -1,3 +1,6 @@
+import * as cloudinary from 'cloudinary';
+import * as fs from 'fs';
+import { diskStorage } from 'multer';
 import {
   BadRequestException,
   Controller,
@@ -7,13 +10,13 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { FilesService } from './files.service';
+import { ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
-import * as cloudinary from 'cloudinary';
-import { fileFilter } from './helpers';
-import { diskStorage } from 'multer';
-import * as fs from 'fs';
 
+import { FilesService } from './files.service';
+import { fileFilter } from './helpers';
+
+@ApiTags('Files - Get and Upload')
 @Controller('files')
 export class FilesController {
   constructor(private readonly filesService: FilesService) {
